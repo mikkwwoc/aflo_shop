@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('price', 10);
+            $table->string('name')->default("default");
+            $table->decimal('price', 10)->default(0);
             $table->integer('quantity')->default(0);
-            $table->boolean('sell_out')->default(false);
             $table->text('description')->nullable();
-            $table->foreignId('category_id')->onDelete('set null');
             $table->timestamps();
         });
     }

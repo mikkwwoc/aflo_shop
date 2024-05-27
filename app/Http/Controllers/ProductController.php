@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -31,7 +31,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create([
+            'name' => $request->get('name'),
+            'price' => $request->get('price'),
+            'description'  => $request->get('description'),
+            'quantity'  => $request->get('quantity'),
+            'image_path' => $request->file('image')->store('products')
+        ]);
+        return redirect()->route('products.index');
     }
 
     /**
@@ -47,7 +54,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit',[
+        'product' => $product
+            ]);
     }
 
     /**
@@ -55,7 +64,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->fill($request->all());
+        if($request->hasFile('image')){
+            $product->image_path = $request->file('image')->store('products');
+        }
+        $product->save();
+        return redirect(route('products.index'));
     }
 
     /**
@@ -63,6 +77,15 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try{
+            $product->delete();
+            return response()->json([
+                'status'=>'ok'
+            ]);
+        }catch (\Exception $exception){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Coś poszło nie tak.']) -> setStatusCode(500);
+        }
     }
 }

@@ -53,13 +53,13 @@
                 if (result.isConfirmed) {
             $.ajax({
             method:"DELETE",
-            url: "http://127.0.0.1:8000/users/" + $(this).data("id")
+            url: "{{url('users')}}/" + $(this).data("id")
             })
                 .done(function(response){
                     window.location.reload(); //po prawidlowym usunieciu reload
                 })
                 .fail(function(response){
-                    Swal.fire("Błąd - coś poszło nie tak");
+                    Swal.fire("Błąd", response.responseJSON.message, response.responseJSON.status);
                 })
                 }
             });

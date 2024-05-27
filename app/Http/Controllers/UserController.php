@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
@@ -61,12 +62,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-            $user=User::find($id);
+        try{
             $user->delete();
             return response()->json([
                 'status'=>'ok'
             ]);
+        }catch (\Exception $exception){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Coś poszło nie tak.']) -> setStatusCode(500);
+        }
     }
 }
