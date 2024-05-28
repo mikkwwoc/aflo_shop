@@ -30,9 +30,18 @@
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>
                     <td>
+                        <a href="{{route('products.show', $product->id)}}">
+                            <button class="btn btn-secondary btn-sm edit">
+                                Zobacz
+                            </button>
+                        </a>
+
                         <a href="{{route('products.edit', $product->id)}}">
-                            edit</a>
-                        <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}">x</button>
+                            <button class="btn btn-success btn-sm edit">
+                                Edit
+                            </button>
+                        </a>
+                        <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}">X</button>
                     </td>
                 </tr>
             @endforeach

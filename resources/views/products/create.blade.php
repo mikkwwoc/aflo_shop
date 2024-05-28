@@ -33,13 +33,13 @@
                                 <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Kwota') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="price" type="number" class="form-control" name="price" required autocomplete="price">
+                                    <input id="price" min="0" step="0.01" type="number" class="form-control" name="price" required autocomplete="price">
 
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label for="quantity" class="col-md-4 col-form-label text-md-end">{{ __('Ilość') }}</label>
+                                <label for="quantity" min="0" step="1" class="col-md-4 col-form-label text-md-end">{{ __('Ilość') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="quantity" type="number" class="form-control" name="quantity" required autocomplete="quantity">
