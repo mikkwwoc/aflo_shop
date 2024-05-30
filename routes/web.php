@@ -23,4 +23,4 @@ Route::post('/products', [App\Http\Controllers\ProductController::class, 'store'
 Route::delete('/products/{product}', [App\Http\Controllers\ProductController::class, 'destroy'])->middleware('auth');
 Route::get('/products/edit/{product}', [App\Http\Controllers\ProductController::class, 'edit'])->middleware('auth')->name('products.edit');
 Route::post('/products/{product}', [App\Http\Controllers\ProductController::class, 'update'])->middleware('auth')->name('products.update');
-Route::get('/products/{product}', [App\Http\Controllers\ProductController::class, 'show'])->middleware('auth')->name('products.show');
+Route::get('/products/{product}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');

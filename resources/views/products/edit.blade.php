@@ -15,7 +15,12 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa produktu') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{$product->name}}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$product->name}}" required autocomplete="name" autofocus>
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -23,9 +28,13 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Opis') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control" name="description" autofocus>{{$product->description}}
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" autofocus>{{$product->description}}
                                     </textarea>
-
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -33,8 +42,12 @@
                                 <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Kwota') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="price" type="number" class="form-control" min="0" step="0.01" name="price" required autocomplete="price" value="{{$product->price}}">
-
+                                    <input id="price" type="number" class="form-control @error('price') is-invalid @enderror" min="0" step="0.01" name="price" required autocomplete="price" value="{{$product->price}}">
+                                    @error('number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -42,14 +55,24 @@
                                 <label for="quantity" class="col-md-4 col-form-label text-md-end">{{ __('Ilość') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="quantity" type="number" class="form-control" min="0" step="1" name="quantity" required autocomplete="quantity" value="{{$product->quantity}}">
+                                    <input id="quantity" type="number" class="form-control @error('number') is-invalid @enderror" min="0" step="1" name="quantity" required autocomplete="quantity" value="{{$product->quantity}}">
+                                    @error('quantity')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="image" class="col-md-4 col-form-label text-md-end">{{ __('Grafika') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control" name="image">
+                                    <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 

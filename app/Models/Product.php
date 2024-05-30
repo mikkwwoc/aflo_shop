@@ -18,8 +18,8 @@ class Product extends Model
         'image_path',
         'name',
         'price',
-        'description',
-        'quantity'
+        'quantity',
+        'description'
     ];
 
 }
