@@ -3,10 +3,9 @@
 @section('content')
     <div class="card text-center container">
         <div class="card-body">
-            <h5 class="card-title">LISTA PRODUKTÓW</h5>
-            <p class="card-text">Zarządzanie produktami</p>
-            <a href="{{route('products.create')}}" class="btn btn-primary">Dodaj produkt</a>
-            <a href="{{route('categories.index')}}" class="btn btn-success">Kategorie</a>
+            <h5 class="card-title">LISTA KATEGORII</h5>
+            <p class="card-text">Zarządzanie kategoriami</p>
+            <a href="{{route('categories.create')}}" class="btn btn-primary">Dodaj kategorie</a>
         </div>
 
     </div>
@@ -16,35 +15,22 @@
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Nazwa</th>
-                <th scope="col">Opis</th>
-                <th scope="col">Cena</th>
-                <th scope="col">Ilość</th>
-                <th scope="col">Kategoria</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $product)
+            @foreach($categories as $category)
                 <tr>
-                    <th scope="row">{{$product->id}}</th>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->description}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->quantity}}</td>
-                    <td>@if($product->hasCategory()) {{$product->category->name}} @endif</td>
+                    <th scope="row">{{$category->id}}</th>
+                    <td>{{$category->name}}</td>
                     <td>
-                        <a href="{{route('products.show', $product->id)}}">
-                            <button class="btn btn-secondary btn-sm edit">
-                                Zobacz
-                            </button>
-                        </a>
 
-                        <a href="{{route('products.edit', $product->id)}}">
+                        <a href="{{route('categories.edit', $category->id)}}">
                             <button class="btn btn-success btn-sm edit">
                                 Edit
                             </button>
                         </a>
-                        <button class="btn btn-danger btn-sm delete" data-id="{{$product->id}}">X</button>
+                        <button class="btn btn-danger btn-sm delete" data-id="{{$category->id}}">X</button>
                     </td>
                 </tr>
             @endforeach
@@ -52,7 +38,7 @@
             </tbody>
         </table>
         <div class="d-flex">
-            {!! $products->links() !!}
+            {!! $categories->links() !!}
         </div>
     </div>
 @endsection
@@ -78,7 +64,7 @@
                 if (result.isConfirmed) {
             $.ajax({
             method:"DELETE",
-            url: "{{url('products')}}/" + $(this).data("id")
+            url: "{{url('categories')}}/" + $(this).data("id")
             })
                 .done(function(response){
                     window.location.reload(); //po prawidlowym usunieciu reload

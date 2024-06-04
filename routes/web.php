@@ -24,3 +24,10 @@ Route::delete('/products/{product}', [App\Http\Controllers\ProductController::cl
 Route::get('/products/edit/{product}', [App\Http\Controllers\ProductController::class, 'edit'])->middleware('auth')->name('products.edit');
 Route::post('/products/{product}', [App\Http\Controllers\ProductController::class, 'update'])->middleware('auth')->name('products.update');
 Route::get('/products/{product}', [App\Http\Controllers\ProductController::class, 'show'])->name('products.show');
+
+Route::get('/categories', [App\Http\Controllers\ProductCategoryController::class, 'index'])->middleware('auth')->name('categories.index');
+Route::get('/categories/create', [App\Http\Controllers\ProductCategoryController::class, 'create'])->middleware('auth')->name('categories.create');
+Route::post('/categories', [App\Http\Controllers\ProductCategoryController::class, 'store'])->middleware('auth')->name('categories.store');
+Route::delete('/categories/{category}', [App\Http\Controllers\ProductCategoryController::class, 'destroy'])->middleware('auth');
+Route::get('/categories/edit/{category}', [App\Http\Controllers\ProductCategoryController::class, 'edit'])->middleware('auth')->name('categories.edit');
+Route::post('/categories/{category}', [App\Http\Controllers\ProductCategoryController::class, 'update'])->middleware('auth')->name('categories.update');
