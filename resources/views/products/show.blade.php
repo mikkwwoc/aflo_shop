@@ -20,8 +20,7 @@
                 <p class="lead">{{$product->description}}</p>
                 <div class="d-flex">
                     <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" step = "1" max="{{$product->quantity}}" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
+                    <button class="btn btn-outline-dark flex-shrink-0 add-to-cart-btn" type="button" data-id="{{$product->id}}" @guest disabled @endguest>
                         Dodaj do koszyka
                     </button>
                 </div>
@@ -68,4 +67,39 @@
 <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
 </footer>
 
+@endsection
+@section('javascript')
+    $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') //?przekazanie tokenu csfr do zainicjowania ajax? bez tego nie dziala usuwanie
+    }
+    });
+
+    $('button.add-to-cart-btn').click(function(event) {
+        event.preventDefault();
+        $.ajax({
+            method: "POST",
+            url: "{{url('cart')}}/" + $(this).data('id')
+        })
+            .done(function() {
+                Swal.fire({
+                title: "Gotowe",
+                text: "Produkt dodany do koszyka",
+                icon: "success",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Przejdź do koszyka",
+                cancelButtonText: "Kontynuuj zakupy"
+
+                }).then((result) => {
+                    if(result.isConfirmed){
+                        window.location = "/cart";
+                        }
+                })
+            })
+            .fail(function(){
+                Swal.fire("Nie udało się", 'Błąd', 'error');
+            })
+        });
 @endsection
