@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role',['admin', 'user'])->default('user')->after('email');
+        Schema::create('order_product', function (Blueprint $table) {
+            $table->foreignId('order_id')->constrained();
+            $table->foreignId('product_id')->constrained();;
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
-        });
+        Schema::dropIfExists('order_product');
     }
 };

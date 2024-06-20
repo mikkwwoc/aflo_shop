@@ -41,11 +41,10 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <form class="d-flex" style="padding-right: 1em">
-                            <button class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Koszyk
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
+                                <a class="btn btn-outline-dark" href="{{route('cart.index')}}">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Koszyk
+                                </a>
                         </form>
                         <!-- Authentication Links -->
                         @guest
@@ -68,15 +67,15 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if(Auth::user()->role=='admin')
-                                            <a class="dropdown-item" href="/users/list" >Użytkownicy</a>
                                             <a class="dropdown-item" href={{route('products.index')}} >Produkty</a>
-                                            <a class="dropdown-item" href={{route('products.index')}} >Zamówienia</a>
+                                            <a class="dropdown-item" href={{route('orders.index')}} >Zamówienia</a>
                                     @endif
                                     @if(Auth::user()->role=='user')
-                                            <a class="dropdown-item" href="/users/list" >Konto</a>
-                                            <a class="dropdown-item" href={{route('products.index')}} >Zamówienia</a>
+                                            <a class="dropdown-item" href={{route('orders.indexuser')}} >Zamówienia</a>
                                     @endif
-
+                                        @if(Auth::user()->role=='superuser')
+                                            <a class="dropdown-item" href="/users/list" >Użytkownicy - zarządzanie rolami</a>
+                                        @endif
 
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

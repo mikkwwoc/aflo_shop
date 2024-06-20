@@ -15,8 +15,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('users/list', [App\Http\Controllers\UserController::class, 'index'])->middleware('admin')->name('users.list');
-Route::delete('users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware('admin');
+Route::get('users/list', [App\Http\Controllers\UserController::class, 'index'])->middleware('superuser')->name('users.list');
+Route::delete('users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->middleware('superuser');
+Route::get('users/edit/{user}', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+Route::post('users/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
 
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->middleware('admin')->name('products.index');
 Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create'])->middleware('admin')->name('products.create');
@@ -35,4 +37,10 @@ Route::post('/categories/{category}', [App\Http\Controllers\ProductCategoryContr
 
 Route::get('cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 Route::post('cart/{product}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
-Route::delete('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+Route::delete('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->middleware('admin')->name('cart.destroy');
+
+Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders/{order}', [App\Http\Controllers\OrderController::class, 'edit'])->middleware('admin')->name('orders.edit');
+Route::post('/orders/{order}', [App\Http\Controllers\OrderController::class, 'update'])->middleware('admin')->name('orders.update');
+Route::get('/orders_user', [App\Http\Controllers\OrderController::class, 'index_user'])->name('orders.indexuser');

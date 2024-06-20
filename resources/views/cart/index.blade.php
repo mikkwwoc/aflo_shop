@@ -7,6 +7,8 @@
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12">
+                    <form action="{{route('orders.store')}}" method="POST" id="order-form">
+                        @csrf
                     <div class="card card-registration card-registration-2" style="border-radius: 15px;">
                         <div class="card-body p-0">
                             <div class="row g-0">
@@ -35,7 +37,7 @@
                                                     <h6 class="mb-0">PLN {{$item->getTotalPrice()}}</h6>
                                                 </div>
                                                 <div class="col-md-2 col-lg-1 col-xl-2 text-end">
-                                                    <button class="btn btn-danger btn-sm delete" data-id="{{$item->getProductId()}}">X</button>
+                                                    <button type="button" class="btn btn-danger btn-sm delete" data-id="{{$item->getProductId()}}">X</button>
                                                 </div>
                                             </div>
                                         <hr class="my-4">
@@ -58,14 +60,13 @@
                                             <h5>PLN {{$cart->getTotalPrice()}}</h5>
                                         </div>
 
-                                        <h5 class="text-uppercase mb-3">Dostawa</h5>
+{{--                                        <h5 class="text-uppercase mb-3">Dostawa</h5>--}}
 
-                                        <div class="mb-4 pb-2">
-                                            <select data-mdb-select-init>
-                                                <option value="1">Standardowa dostawa - PLN 20</option>
-                                                <option value="2">Priorytetowa dostawa - PLN 30</option>
-                                            </select>
-                                        </div>
+{{--                                        <div class="mb-4 pb-2">--}}
+{{--                                            <select data-mdb-select-init>--}}
+{{--                                                <option value="1">Standardowa dostawa - PLN 20</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
 
                                         <h5 class="text-uppercase mb-3">Metoda płatności</h5>
 
@@ -91,13 +92,14 @@
                                             <h5>PLN {{$cart->getTotalPrice()}}</h5>
                                         </div>
 
-                                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
-                                                 data-mdb-ripple-color="dark">Przejdź do płatności</button>
+                                        <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block btn-lg"
+                                                 data-mdb-ripple-color="dark ">Przejdź do płatności</button>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>

@@ -60,6 +60,7 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -67,7 +68,7 @@ class ProductController extends Controller
     {
         return view('products.show',[
             'product' => $product,
-            'products' => Product::paginate(4)
+            'products' => Product::paginate(10)
         ]);
     }
 

@@ -69,8 +69,17 @@ class ProductCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ProductCategory $category)
     {
-        //
+        try{
+            $category->delete();
+            return response()->json([
+                'status'=>'ok'
+            ]);
+        }catch (\Exception $exception){
+            return response()->json([
+                'status'=>'error',
+                'message'=>'Coś poszło nie tak.']) -> setStatusCode(500);
+        }
     }
 }

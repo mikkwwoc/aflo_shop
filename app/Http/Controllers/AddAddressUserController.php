@@ -12,7 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 
-class UserController extends Controller
+class AddAddressUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,21 +52,26 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user): Factory|\Illuminate\Foundation\Application|View|Application
     {
-        return view('users.edit',[
-            'user' => $user
-        ]);
+
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $user->fill($request->all());
-        $user->save();
-        return redirect(route('users.list'));
+        $addressValidated = $request->validated()['address'];
+        if ($user->hasAddress()) {
+            $address = $user->address;
+            $address->fill($addressValidated);
+        } else {
+            $address = new Address($addressValidated);
+        }
+        $user->address()->save($address);
+        return redirect(route('users.index'));
     }
 
     /**
